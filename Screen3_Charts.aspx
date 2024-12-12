@@ -177,7 +177,7 @@
                         name: 'Cumulative %',
                         yAxis: 1,
                         data: <%= paretoChartData %>.map(function (item) { return item.cumulativePercentage; }),
-                        marker: { enabled: false }
+                        marker: { enabled: true }
                     }
                 ],
                 tooltip: {
