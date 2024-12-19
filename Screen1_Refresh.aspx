@@ -26,7 +26,7 @@
             height: 80px;
             /* Remove padding */
         }
-     
+
         .header-left {
             width: 60px;
             height: 70px;
@@ -38,7 +38,7 @@
             font-size: 34px;
             font-weight: bold;
             text-align: center;
-           padding-left:272px;
+            padding-left: 272px;
             flex-grow: 1;
             color: white;
             line-height: 50px;
@@ -48,13 +48,10 @@
         .header-right-section {
             display: flex;
             align-items: center;
-            
             padding-right: 20px;
-           
-           
             background-color: #0056b3;
             height: 80px;
-            width:330px;
+            width: 330px;
         }
 
         .max {
@@ -64,9 +61,9 @@
         .maximize {
         }
 
-        .header-left{
-            height:80px;
-            width:90px;
+        .header-left {
+            height: 80px;
+            width: 90px;
         }
 
         .header-info {
@@ -76,9 +73,8 @@
         #currentDate {
             font-size: 34px;
             font-weight: bold;
-            padding-right:55px;
-            padding-left:55px;
-           
+            padding-right: 55px;
+            padding-left: 55px;
         }
 
         .header-icon1 {
@@ -95,7 +91,7 @@
         }
         /* Sub-header styling */
         h5 {
-           background-color: #004080;
+            background-color: #004080;
             color: white;
             padding: 10px 0;
             margin: 0;
@@ -112,7 +108,7 @@
             align-content: center;
             align-items: center;
             justify-content: center; /* Center-align the boxes in the row */
-            padding:44px;
+            padding: 44px;
             margin: 0 auto; /* Center the container itself */
             /* Centers items horizontally */
         }
@@ -171,13 +167,13 @@
         }
 
         .footer {
-         background-color: #486ab7;
+            background-color: #486ab7;
             color: white;
             padding: 15px 20px;
             position: fixed;
             bottom: 0;
             width: 100%;
-            height:42px;
+            height: 42px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -197,33 +193,31 @@
             background-color: #004080;
             color: white;
             padding: 8px;
-             height:18px;
-            padding-top:16px;
-            padding-bottom:16px;
+            height: 18px;
+            padding-top: 16px;
+            padding-bottom: 16px;
             font-size: 18px;
-            
-           box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
+            box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
             width: 82%;
-           
             margin: 10px auto;
             text-align: center;
         }
 
 
-      .footer-right img {
-                height: 50px;
-                margin-left: 10px;
-                margin-right: 35px;
-            }
-      .icon-container {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                grid-template-rows: repeat(2, auto);
-                gap: 10px;
-                align-items: center;
-                margin-right:0px;
-               
-            }
+        .footer-right img {
+            height: 50px;
+            margin-left: 10px;
+            margin-right: 35px;
+        }
+
+        .icon-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: repeat(2, auto);
+            gap: 10px;
+            align-items: center;
+            margin-right: 0px;
+        }
     </style>
 
 </head>
@@ -237,15 +231,13 @@
                 <span id="currentDate"></span>
             </div>
             <div class="max">
-               <div class="icon-container">
+                <div class="icon-container">
                     <img src="./Images/home.png" class="header-icon" alt="Home Icon" />
                     <img src="./Images/settings.png" class="header-icon" alt="Settings Icon" />
-                    <div></div> 
+                    <div></div>
                     <img src="./Images/maximize.png" class="header-icon " alt="Help Icon" />
-</div>
+                </div>
             </div>
-
-
         </div>
     </div>
 

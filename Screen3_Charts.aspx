@@ -120,14 +120,13 @@
                 title: { text: ' ' },
                 series: [{
                     name: 'Downtime (Seconds)',
-
                     data: <%= pieChartData %>, 
                     dataLabels: {
                         enabled: true,
                         formatter: function () {
                            
                             var downtimeFormatted = this.downtimeFormatted;
-                            var percentage = (this.percentage).toFixed(1);  // Round percentage to 1 decimal
+                            var percentage = (this.percentage).toFixed(2);  // Round percentage to 1 decimal
                             return this.point.name + ": " + downtimeFormatted + " (" + percentage + "%)";
                         }
                     }
@@ -177,7 +176,7 @@
                         name: 'Cumulative %',
                         yAxis: 1,
                         data: <%= paretoChartData %>.map(function (item) { return item.cumulativePercentage; }),
-                        marker: { enabled: false }
+                        marker: { enabled: true }
                     }
                 ],
                 tooltip: {

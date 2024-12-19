@@ -17,12 +17,16 @@ using System.Globalization;
 using System.Runtime.Remoting.Messaging;
 using System.ComponentModel;
 using System.Diagnostics;
-
+using static ASP_Evaluation_Task.Screen2_Table;
+using OfficeOpenXml;
+using OfficeOpenXml.Style;
+using System.Drawing;
+using System.IO;
 
 
 namespace ASP_Evaluation_Task
 {
-    public partial class Screen2_Table : System.Web.UI.Page
+    public partial class Screen2_Table_Copy : System.Web.UI.Page
     {// A dictionary to hold the dynamic headers and their corresponding values
         private Dictionary<string, List<string>> dynamicHeaders = new Dictionary<string, List<string>>();
         private List<string> columnOrder;
@@ -45,20 +49,31 @@ namespace ASP_Evaluation_Task
 
         private string ConnectionString => WebConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
 
-        public class ColumnNames
+        public class ColumnNames_111
         {
-            public DateTime Date { get; set; }
+            public string Date { get; set; }
             public string Shift { get; set; } = string.Empty;
             public string ComponentId { get; set; }
             public string SerialNo { get; set; }
-            public List<ColumnNames> listviewdata { get; set; } = new List<ColumnNames>();
-            public string RenderData { get; set; }
+            public List<childClass> listviewdata { get; set; } = new List<childClass>();
             public string SpindleLoad { get; set; }
             public string Result { get; set; }
             public string Remarks { get; set; }
-            public bool headervisible { get; set; }
 
+            public int RowSpan { get; set; } = 1;
+            public bool tdVisible { get; set; } = true;
         }
+
+        public class childClass
+        {
+            public string CharacteristicValue { get; set; }
+           public string backColor { get; set; }
+            public int tdColSpan { get; set; } = 1;
+        }
+
+
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -266,10 +281,11 @@ namespace ASP_Evaluation_Task
                 {
                     listview1.DataSource = null;
                     listview1.DataBind();
-                    List<ColumnNames> list = new List<ColumnNames>();
-                    List<ColumnNames> dynValues = new List<ColumnNames>();
-                    ColumnNames data = null;
-                    ColumnNames ColumnNamesdata = null;
+                    List<ColumnNames_111> list = new List<ColumnNames_111>();
+                    List<childClass> dynValues = new List<childClass>();
+
+                    ColumnNames_111 data = null;
+                    childClass ColumnNames_111data = null;
 
                     if (dt != null && dt.Rows.Count > 0)
                     {
@@ -277,44 +293,130 @@ namespace ASP_Evaluation_Task
                         {
                             if (i == 0)
                             {
-                                data = new ColumnNames();
-                                data.Date = Convert.ToDateTime(dt.Rows[i]["Date"]);  // Assuming the column names match
-                                data.Shift = dt.Rows[i]["Shift"].ToString();
-                                data.ComponentId = dt.Rows[i]["ComponentID"].ToString();
-                                data.SerialNo = dt.Rows[i]["SerialNo"].ToString();
-                                data.SpindleLoad = dt.Rows[i]["SpindleLoad"].ToString();
-                                data.Result = dt.Rows[i]["Result"].ToString();
-                                data.Remarks = dt.Rows[i]["Remarks"].ToString();
-                                data.headervisible = true;
-                                dynValues = new List<ColumnNames>();
+                                ColumnNames_111 Row1 = new ColumnNames_111(); // Header
+                                ColumnNames_111 Row2 = new ColumnNames_111(); // Sub header
+
+                                Row1.Date = "Date";
+                                Row1.Shift = "Shift";
+                                Row1.ComponentId = "ComponentID";
+                                Row1.SerialNo = "SerialNo";
+
+                                Row1.SpindleLoad = "SpindleLoad";
+                                Row1.Result = "Result";
+                                Row1.Remarks = "Remarks";
+                                Row1.RowSpan = 2;
+
+
+                                Row2.tdVisible = false;
+
+                                List<childClass> dynValues_Row1 = new List<childClass>();
+                                List<childClass> dynValues_Row2 = new List<childClass>();
+
+
                                 for (int j = 10; j < dt.Columns.Count; j++)
                                 {
-                                    ColumnNamesdata = new ColumnNames();
-                                    ColumnNamesdata.RenderData = dt.Columns[j].ColumnName;
-                                    dynValues.Add(ColumnNamesdata);
-                                }                                //RenderColumn.HeaderVisibility = false;
-                                list.Add(data);                               //RenderData.HeaderVisibility = false;
+                                    string colName = dt.Columns[j].ColumnName;
+                                    var keyParts = colName.Split('$');
+                                    var mainHeader = keyParts.Length > 0 ? keyParts[0] + keyParts[1].Split('@')[0] : colName;
+                                    var subHeader = keyParts.Length > 1 && keyParts[1].Contains('@')
+                                        ? keyParts[1].Split('@').Last()
+                                        : string.Empty;
+
+                                    dynValues_Row1.Add(new childClass { CharacteristicValue = mainHeader });
+                                    dynValues_Row2.Add(new childClass { CharacteristicValue = subHeader });
+
+                                }
+                                Row1.listviewdata = dynValues_Row1;
+                                Row2.listviewdata = dynValues_Row2;
+
+                                list.Add(Row1);
+                                list.Add(Row2);
+                            }
+
+
+                            data = new ColumnNames_111();
+                            data.Date = dt.Rows[i]["Date"].ToString();  // Assuming the column names match
+
+                            data.Shift = dt.Rows[i]["Shift"].ToString();
+                            data.ComponentId = dt.Rows[i]["ComponentID"].ToString();
+                            data.SerialNo = dt.Rows[i]["SerialNo"].ToString();
+                            data.SpindleLoad = dt.Rows[i]["SpindleLoad"].ToString();
+                            data.Result = dt.Rows[i]["Result"].ToString();
+                            data.Remarks = dt.Rows[i]["Remarks"].ToString();
+                            int v=dt.Rows.Count;
+
+                            dynValues = new List<childClass>();
+                            for (int j = 10; j < dt.Columns.Count; j++)
+                            {
+                                ColumnNames_111data = new childClass();
+                                ColumnNames_111data.CharacteristicValue = dt.Rows[i][j].ToString();
+                                //  ColumnNames_111data.dynamicvalues = dt.Rows[i][j].ToString();
+                                dynValues.Add(ColumnNames_111data);
+
+                                string colName = dt.Columns[j].ColumnName;
+                                var keyParts = colName.Split('$');
+                                var mainHeader = keyParts.Length > 0 ? keyParts[0] + keyParts[1].Split('@')[0] : colName;
+                                var subHeader = keyParts.Length > 1 && keyParts[1].Contains('@')
+                                    ? keyParts[1].Split('@').Last()
+                                    : string.Empty;
+                            
+                                string dvalue = ColumnNames_111data.CharacteristicValue;
+
+                                if (!string.IsNullOrEmpty(dvalue) && double.TryParse(ColumnNames_111data.CharacteristicValue, out double value))
+                                {
+
+                                    ColumnNames_111data.backColor = "color : red;"; // Default to red
+
+                                    // Apply conditions for specific columns
+                                    if (mainHeader == "Fine Boring by Renishaw30.81_30.87" && value >= 30.81 && value <= 30.87)
+                                    {
+                                        ColumnNames_111data.backColor = "color : green;";
+                                    }
+                                    else if (mainHeader == "Fine Boring by Renishaw30.81_30.87" && value >= 30.81 && value <= 30.87)
+                                    {
+                                        ColumnNames_111data.backColor = "color : green;";
+                                    }
+                                    else if (mainHeader == "Input Size by Renishaw20.82_20.88" && value >= 20.82 && value <= 20.88)
+                                    {
+                                        ColumnNames_111data.backColor = "color : green;";
+                                    }
+                                    else if (mainHeader == "Input Size by Renishaw20.82_20.88" && value <= 20.87 && value <= 20.88)
+                                    {
+                                        ColumnNames_111data.backColor = "color : green;";
+                                    }
+                                    else if (mainHeader == "Mechanical Size by Versa19.81_19.87" && value >= 19.81 && value <= 19.87)
+                                    {
+                                        ColumnNames_111data.backColor = "color : green;";
+                                    }
+
+
+                                    // Find the Label control in the template and apply the style
+
+
+
+                                }
 
                             }
-                            // list.Add(data);
-                        }
 
+                            data.listviewdata = dynValues; //RenderColumn.HeaderVisibility = false;
+                            list.Add(data);
+                        }
+                       
+
+                            listview1.DataSource = list;
+                            listview1.DataBind();
+                        }
                     }
-                    // lblMessage.Visible = false;
-                    // Assuming you already have the DataTable 'dt'
-                    listview1.DataSource = resultTable;
-                    listview1.DataBind();
+                    else
+                    {
+
+                        listview1.DataSource = null; // Clear any previous data
+                        listview1.DataBind();
+                    }
+
                 }
             }
-            else
-            {
-                // lblMessage.Text = "No data found for the given search criteria.";
-                //  lblMessage.Visible = true;
-                listview1.DataSource = null; // Clear any previous data
-                listview1.DataBind();
-            }
-
-        }
+        
 
         private string ConvertToCustomDateFormat(string dateString)
         {
@@ -411,161 +513,179 @@ namespace ASP_Evaluation_Task
 
             return dt;
         }
+        protected void btnExport_Click(object sender, EventArgs e)
+{
+    // Create Excel Package
+    using (ExcelPackage excelPackage = new ExcelPackage())
+    {
+        // Add a worksheet
+        ExcelWorksheet worksheet = excelPackage.Workbook.Worksheets.Add("ExportedData");
+
+        int row = 1; // Start writing from the first row
+        int col = 1; // Start writing from the first column
+
+        // Export Header Row
+        worksheet.Cells[row, col].Value = "Date";
+        worksheet.Cells[row, col + 1].Value = "Shift";
+        worksheet.Cells[row, col + 2].Value = "ComponentID";
+        worksheet.Cells[row, col + 3].Value = "SerialNo";
+        worksheet.Cells[row, col + 4].Value = "SpindleLoad";
+        worksheet.Cells[row, col + 5].Value = "Result";
+        worksheet.Cells[row, col + 6].Value = "Remarks";
+
+        // Apply header styles
+        using (var range = worksheet.Cells[row, 1, row, 7])
+        {
+            range.Style.Font.Bold = true;
+            range.Style.Fill.PatternType = ExcelFillStyle.Solid;
+            range.Style.Fill.BackgroundColor.SetColor(Color.LightGray);
+            range.Style.HorizontalAlignment = ExcelHorizontalAlignment.Center;
+        }
+
+        row++; // Move to the next row for data
+
+               
+        foreach (ListViewItem item in listview1.Items)
+                {
+                    // Export outer ListView data
+                    worksheet.Cells[row, col].Value = ((Label)item.FindControl("Date")).Text;
+                    worksheet.Cells[row, col + 1].Value = ((Label)item.FindControl("Shift")).Text;
+                    worksheet.Cells[row, col + 2].Value = ((Label)item.FindControl("ComponentID")).Text;
+                    worksheet.Cells[row, col + 3].Value = ((Label)item.FindControl("SerialNo")).Text;
+
+                    // Export inner ListView data
+                    ListView lvInner = (ListView)item.FindControl("lvInnerListView");
+                    int innerRow = row;
+
+                    foreach (ListViewItem innerItem in lvInner.Items)
+                    {
+                        var characteristicValueLabel = (Label)innerItem.FindControl("CharacteristicValueLabel");
+                        var backColorStyle = innerItem.DataItem as dynamic;
+
+                        // Write CharacteristicValue
+                        worksheet.Cells[innerRow, col + 4].Value = characteristicValueLabel.Text;
+
+                        // Apply Cell Style based on backColor
+                        if (backColorStyle != null && backColorStyle.backColor != null)
+                        {
+                            Color cellColor = ColorTranslator.FromHtml(backColorStyle.backColor);
+                            worksheet.Cells[innerRow, col + 4].Style.Fill.PatternType = ExcelFillStyle.Solid;
+                            worksheet.Cells[innerRow, col + 4].Style.Fill.BackgroundColor.SetColor(cellColor);
+                        }
+
+                        innerRow++;
+                    }
+
+                    // Move to the next row
+                    row = Math.Max(innerRow, row + 1);
+
+                    // Export SpindleLoad, Result, and Remarks
+                    worksheet.Cells[row - 1, col + 5].Value = ((Label)item.FindControl("SpindleLoad")).Text;
+                    worksheet.Cells[row - 1, col + 6].Value = ((Label)item.FindControl("Result")).Text;
+                    worksheet.Cells[row - 1, col + 7].Value = ((Label)item.FindControl("Remarks")).Text;
+                }
+
+                // Auto-fit columns for better readability
+                worksheet.Cells[worksheet.Dimension.Address].AutoFitColumns();
+
+        // Set Response Headers for Download
+        Response.Clear();
+        Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+        Response.AddHeader("content-disposition", "attachment; filename=ExportedListViewData.xlsx");
+
+        // Write Excel file to response
+        using (MemoryStream stream = new MemoryStream())
+        {
+            excelPackage.SaveAs(stream);
+            stream.WriteTo(Response.OutputStream);
+            Response.Flush();
+            Response.End();
+        }
+    }
+            //using (ExcelPackage package1 = new ExcelPackage())
+            //{
+            //    ExcelWorksheet ws = package1.Workbook.Worksheets.Add("Screen2_Table");
+            //    ws.Cells["A1"].LoadFromDataTable(listview1, true);
+            //    package1.SaveAs(new FileInfo(@"C:\Users\devteam\Documents\Demo_C#\WEB_ASP.Net\EPPlus_ExcelScreen2.xlsx"));
+            //}
+        }
         public class DimensionColumn
         {
             public string Key { get; set; }
             public string DisplayName { get; set; }
         }
-        protected void listview1_DataBound(object sender, EventArgs e)
-        {
-            if (listview1.DataSource is DataTable resultTable)
-            {
-                // Filter and group headers
-                var dynamicHeaders = dimensionColumns
-                    .Where(columnName => resultTable.Columns.Contains(columnName))
-                    .ToList();
-
-                var filteredColumns = dynamicHeaders
-                    .Select(column =>
-                    {
-                        var keyParts = column.Split('$');
-                        var mainHeader = keyParts.Length > 0 ? keyParts[0] : column;
-                        var subHeader = keyParts.Length > 1 && keyParts[1].Contains('@')
-                            ? keyParts[1].Split('@').Last()
-                            : string.Empty;
-                        return new KeyValuePair<string, string>(column, subHeader);
-                    })
-                    .ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
-
-                var groupedHeaders = filteredColumns
-                    .GroupBy(kvp =>
-                    {
-                        var keyParts = kvp.Key.Split('$');
-                        return keyParts.Length > 0 ? keyParts[0] : kvp.Key;
-                    })
-                    .ToDictionary(
-                        g => g.Key,
-                        g => g.Select(kvp => kvp.Value)
-                              .Where(val => !string.IsNullOrEmpty(val))
-                              .Distinct()
-                              .ToList()
-                    );
-
-                // Bind to ListView
-                var dynamicHeadersListView = listview1.FindControl("phDynamicHeaders") as ListView;
-                if (dynamicHeadersListView != null)
-                {
-                    dynamicHeadersListView.DataSource = groupedHeaders;
-                    dynamicHeadersListView.DataBind();
-                }
-               
-                ViewState["FilteredColumns"] = filteredColumns;
-            }
-        }
-
-        protected void listview1_ItemDataBound(object sender, ListViewItemEventArgs e)
-        {
-            if (e.Item.ItemType == ListViewItemType.DataItem)
-            {
-                var rowView = e.Item.DataItem as DataRowView;
-                if (rowView != null)
-                {
-                    // Extract dynamic data for this row
-                    var filteredColumns = ViewState["FilteredColumns"] as Dictionary<string, string>;
-                    if (filteredColumns == null) return;
-
-                    var dynamicDataListView = e.Item.FindControl("phDynamicData") as ListView;
-                    if (dynamicDataListView != null)
-                    {
-                        // Bind only the filtered columns
-                        var dynamicData = filteredColumns
-                            .Where(kvp => rowView.DataView.Table.Columns.Contains(kvp.Key))
-                            .Select(kvp => new
-                            {
-                                Value = rowView[kvp.Key]?.ToString() ?? string.Empty,
-                                Header = kvp.Key
-                            })
-                            .ToList();
-
-                        dynamicDataListView.DataSource = dynamicData;
-                        dynamicDataListView.DataBind();
-
-                    }
 
 
-                }
-            }
-           
+        //protected void listview1_DataBound(object sender, EventArgs e)
+        //{
+        //    if (listview1.DataSource is DataTable resultTable)
+        //    {
+        //        // Filter dynamic headers that exist in the resultTable
+        //        var dynamicHeaders = dimensionColumns
+        //            .Where(columnName => resultTable.Columns.Contains(columnName))
+        //            .ToList();
+
+        //        // Find the dynamic headers ListView
+        //        var dynamicHeadersListView = listview1.FindControl("lvInnerListView") as ListView;
+        //        if (dynamicHeadersListView != null)
+        //        {
+        //            dynamicHeadersListView.DataSource = dynamicHeaders;
+        //            dynamicHeadersListView.DataBind();
+        //        }
+        //    }
+        //}
 
 
-        }
+
+        //protected void phDynamicHeaders_ItemDataBound(object sender, ListViewItemEventArgs e)
+        //{
+        //    if (e.Item.ItemType == ListViewItemType.DataItem)
+        //    {
+        //        var groupedHeader = (KeyValuePair<string, List<string>>)e.Item.DataItem;
+
+        //        if (!string.IsNullOrEmpty(groupedHeader.Key))
+        //        {
+        //            var mainheader = groupedHeader.Key;
+        //            var subheader = groupedHeader.Value;
+
+        //            var literalHeader = e.Item.FindControl("headerPlaceHolder") as Literal;
+        //            if (literalHeader != null)
+        //            {
+        //                int colspan = subheader.Count > 1 ? 2 : 1;
+        //                literalHeader.Text = $"<th colspan='{colspan}'>{mainheader}</th>";  // Main header
+        //            }
+
+        //            // Bind only the filtered subheaders
+        //            var subHeadersListView = e.Item.FindControl("phDynamicSubHeaders") as ListView;
+        //            if (subHeadersListView != null)
+        //            {
+        //                subHeadersListView.DataSource = subheader; // Subheaders
+        //                subHeadersListView.DataBind();
+        //            }
+        //        }
+        //    }
+
+        //}
+        //protected void phDynamicSubHeaders_ItemDataBound(object sender, ListViewItemEventArgs e)
+        //{
+        //    if (e.Item.ItemType == ListViewItemType.DataItem)
+        //    {
+        //        var subHeader = (string)e.Item.DataItem;
+        //        var literalSubHeader = e.Item.FindControl("subHeaderPlaceHolder") as Literal;
+        //        if (literalSubHeader != null)
+        //        {
+        //            literalSubHeader.Text = subHeader; // Set the subheader text
+        //        }
+        //    }
+        //}
 
 
-        protected void phDynamicHeaders_ItemDataBound(object sender, ListViewItemEventArgs e)
-        {
-            if (e.Item.ItemType == ListViewItemType.DataItem)
-            {
-                var groupedHeader = (KeyValuePair<string, List<string>>)e.Item.DataItem;
-
-                if (!string.IsNullOrEmpty(groupedHeader.Key))
-                {
-                    var mainheader = groupedHeader.Key;
-                    var subheader = groupedHeader.Value;
-
-                    var literalHeader = e.Item.FindControl("headerPlaceHolder") as Literal;
-                    if (literalHeader != null)
-                    {
-                        int colspan = subheader.Count > 1 ? 2 : 1;
-                        literalHeader.Text = $"<th colspan='{colspan}'>{mainheader}</th>";  // Main header
-                    }
-
-                    // Bind only the filtered subheaders
-                    var subHeadersListView = e.Item.FindControl("phDynamicSubHeaders") as ListView;
-                    if (subHeadersListView != null)
-                    {
-                        subHeadersListView.DataSource = subheader; // Subheaders
-                        subHeadersListView.DataBind();
-                    }
-                }
-            }
-
-        }
-        protected void phDynamicSubHeaders_ItemDataBound(object sender, ListViewItemEventArgs e)
-        {
-            if (e.Item.ItemType == ListViewItemType.DataItem)
-            {
-                var subHeader = (string)e.Item.DataItem;
-                var literalSubHeader = e.Item.FindControl("subHeaderPlaceHolder") as Literal;
-                if (literalSubHeader != null)
-                {
-                    literalSubHeader.Text = subHeader; // Set the subheader text
-                }
-            }
-        }
-
-
-        protected void phDynamicData_ItemDataBound(object sender, ListViewItemEventArgs e)
-        {
-            if (e.Item.ItemType == ListViewItemType.DataItem)
-            {
-                var dataItem = e.Item.DataItem as dynamic;
-                if (dataItem != null)
-                {
-                    var literalData = e.Item.FindControl("DataPlaceHolder") as Literal;
-                    if (literalData != null)
-                    {
-
-                        literalData.Text = dataItem.Value; // Set the dynamic cell value
-
-                    }
-                }
-
-
-            }
-        }
-
+     
     }
 }
+
+
+
 
 
 //using System;
@@ -613,13 +733,13 @@ namespace ASP_Evaluation_Task
 
 //        private string ConnectionString => WebConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
 
-//        public class ColumnNames
+//        public class ColumnNames_111
 //        {
 //            public DateTime Date { get; set; }
 //            public string Shift { get; set; } = string.Empty;
 //            public string ComponentId { get; set; }
 //            public string SerialNo { get; set; }
-//            public List<ColumnNames> listviewdata { get; set; } = new List<ColumnNames>();
+//            public List<ColumnNames_111> listviewdata { get; set; } = new List<ColumnNames_111>();
 //            public string RenderData { get; set; }
 //            public string SpindleLoad { get; set; }
 //            public string Result { get; set; }
@@ -834,10 +954,10 @@ namespace ASP_Evaluation_Task
 //                {
 //                    listview1.DataSource = null;
 //                    listview1.DataBind();
-//                    List<ColumnNames> list = new List<ColumnNames>();
-//                    List<ColumnNames> dynValues = new List<ColumnNames>();
-//                    ColumnNames data = null;
-//                    ColumnNames ColumnNamesdata = null;
+//                    List<ColumnNames_111> list = new List<ColumnNames_111>();
+//                    List<ColumnNames_111> dynValues = new List<ColumnNames_111>();
+//                    ColumnNames_111 data = null;
+//                    ColumnNames_111 ColumnNames_111data = null;
 
 //                    if (dt != null && dt.Rows.Count > 0)
 //                    {
@@ -845,7 +965,7 @@ namespace ASP_Evaluation_Task
 //                        {
 //                            if (i == 0)
 //                            {
-//                                data = new ColumnNames();
+//                                data = new ColumnNames_111();
 //                                data.Date = Convert.ToDateTime(dt.Rows[i]["Date"]);  // Assuming the column names match
 //                                data.Shift = dt.Rows[i]["Shift"].ToString();
 //                                data.ComponentId = dt.Rows[i]["ComponentID"].ToString();
@@ -854,12 +974,12 @@ namespace ASP_Evaluation_Task
 //                                data.Result = dt.Rows[i]["Result"].ToString();
 //                                data.Remarks = dt.Rows[i]["Remarks"].ToString();
 //                                data.headervisible = true;
-//                                dynValues = new List<ColumnNames>();
+//                                dynValues = new List<ColumnNames_111>();
 //                                for (int j = 10; j < dt.Columns.Count; j++)
 //                                {
-//                                    ColumnNamesdata = new ColumnNames();
-//                                    ColumnNamesdata.RenderData = dt.Columns[j].ColumnName;
-//                                    dynValues.Add(ColumnNamesdata);
+//                                    ColumnNames_111data = new ColumnNames_111();
+//                                    ColumnNames_111data.RenderData = dt.Columns[j].ColumnName;
+//                                    dynValues.Add(ColumnNames_111data);
 //                                }                                //RenderColumn.HeaderVisibility = false;
 //                                list.Add(data);                               //RenderData.HeaderVisibility = false;
 

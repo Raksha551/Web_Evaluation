@@ -44,21 +44,18 @@ namespace ASP_Evaluation_Task
             }
 
             var combinedData = downIds.Zip(downtimes, (id, time) => new { DownID = id, DowntimeInSeconds = time })
-                            .OrderByDescending(x => x.DowntimeInSeconds) // Sort by DowntimeInSeconds in descending order
+                            .OrderByDescending(x => x.DowntimeInSeconds)
                             .ToList();
 
-            // Rebuild the lists after sorting
             downIds = combinedData.Select(x => x.DownID).ToList();
             downtimes = combinedData.Select(x => x.DowntimeInSeconds).ToList();
 
-            // Rebuild formatted downtime list after sorting
             formattedDowntimes.Clear();
             foreach (var downtime in downtimes)
             {
                 formattedDowntimes.Add(FormatTime(downtime));
             }
 
-            // Calculate cumulative percentage
             List<double> cumulativePercentages = new List<double>();
             double cumulativeTotal = 0;
 
@@ -68,21 +65,15 @@ namespace ASP_Evaluation_Task
                 cumulativePercentages.Add((cumulativeTotal / totalDowntime) * 100);
             }
 
-            // Create an instance of JavaScriptSerializer
             JavaScriptSerializer serializer = new JavaScriptSerializer();
 
-            // Serialize pieChartData (using formatted time)
             pieChartData = serializer.Serialize(
                 downIds.Zip(formattedDowntimes, (id, time) => new { name = id, y = downtimes[downIds.IndexOf(id)], downtimeFormatted = time }));
-
-            // Serialize paretoChartData (raw downtimes for column and cumulative percentages for the line)
-            //var paretoData = downtimes.Zip(cumulativePercentages, (downtime, cumulativePercentage) => new { downtime, cumulativePercentage });
-            //paretoChartData = serializer.Serialize(paretoData);
 
             var paretoData = downtimes.Zip(cumulativePercentages, (downtime, cumulativePercentage) => new
             {
                 downtimeRaw = downtime, // Raw downtime in seconds
-                downtimeFormatted = FormatTime(downtime), // Downtime in HH:MM format
+                downtimeFormatted = FormatTime(downtime),
                 cumulativePercentage
             });
             paretoChartData = serializer.Serialize(paretoData);

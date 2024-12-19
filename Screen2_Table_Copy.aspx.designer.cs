@@ -11,7 +11,7 @@ namespace ASP_Evaluation_Task
 {
 
 
-    public partial class Screen2_Table
+    public partial class Screen2_Table_Copy
     {
 
         /// <summary>
@@ -121,32 +121,5 @@ namespace ASP_Evaluation_Task
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ListView listview1;
-
-        /// <summary>
-        /// phDynamicHeaders control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ListView phDynamicHeaders;
-
-        /// <summary>
-        /// itemPlaceHolder control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.PlaceHolder itemPlaceHolder;
-
-        /// <summary>
-        /// phDynamicData control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ListView phDynamicData;
     }
 }

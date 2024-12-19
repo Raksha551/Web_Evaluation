@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Screen2_Table.aspx.cs" Inherits="ASP_Evaluation_Task.Screen2_Table" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Screen2_Table_Copy.aspx.cs" Inherits="ASP_Evaluation_Task.Screen2_Table_Copy" %>
 
 <!DOCTYPE html>
 
@@ -47,11 +47,6 @@
                 includeSelectAllOption: true
 
             });
-
-            //function updateSelectedCount(selector, label) {
-            //    var count = $(selector).val() ? $(selector).val().length : 0;
-            //    $(label).text(`All selected (${count})`);
-            //}
         });
     </script>
     <style>
@@ -221,18 +216,7 @@
             color: #DADBDD;
         }
 
-        .grid-table {
-            width: 150%; /* Adjust as needed */
-            border-collapse: collapse;
-            margin: 180px 18%;
-            margin-left: 15%;
-            padding-top: 17%;
-            border: 1px solid #DADBDD;
-            table-layout: fixed;
-            color: #DADBDD;
-            width: 80%;
-            padding-left: 20%;
-        }
+
 
         .scrollable-gridview-container {
             max-height: 400px; /* Set maximum height for vertical scrolling */
@@ -243,25 +227,7 @@
 
 
 
-        .grid-table th, .grid-table td {
-            max-width: 100px; /* Limit the width of cells */
-            word-wrap: break-word; /* Allow wrapping of long words */
-            overflow: hidden; /* Hide overflowing content */
-            text-overflow: ellipsis; /* Add ellipsis for truncated content */
-            white-space: normal; /* Allow wrapping */
-            padding: 8px; /* Add padding for readability */
-            border: 1px solid #ddd; /* Add borders to cells */
-        }
 
-        .gridview-header {
-            word-wrap: break-word; /* Allow text to wrap */
-            white-space: normal; /* Ensure normal text wrapping */
-            overflow: hidden; /* Hide overflowing content */
-            /*text-overflow: ellipsis; */ /* Add ellipsis for overflow */
-            max-width: 200px; /* Set a maximum width for column headers */
-            text-align: center; /* Align text to the left */
-            padding: 8px;
-        }
 
         table th, table td {
             border: 1px solid #ddd;
@@ -278,6 +244,120 @@
             margin-top: 0px;
         }
 
+        #listview1 {
+          
+            border-collapse: collapse;
+            margin-top: 48px;
+        }
+
+        .listviewtable {
+             width:100%;
+            text-align: center;
+        }
+
+        .listviewrow {
+            word-wrap: break-word; /* Allow wrapping of long words */
+            overflow: hidden; /* Hide overflowing content */
+            text-overflow: ellipsis; /* Add ellipsis for truncated content */
+            white-space: normal;
+            text-align: center;
+            border: 0px;
+        }
+
+        .listviewtd {
+            height: 10px;
+            width: 70px;
+            text-align: center;
+            word-wrap: break-word; /* Allow wrapping of long words */
+            overflow: hidden; /* Hide overflowing content */
+            text-overflow: ellipsis; /* Add ellipsis for truncated content */
+            white-space: normal;
+            background-color: white;
+            color: black;
+        }
+
+     
+
+        .tddate {
+            width: 90px;
+            height: 0px;
+              text-align: center;
+              
+        }
+
+        .tdshift {
+            width: 50px;
+            height: 0px;  text-align: center;
+           
+        }
+
+
+
+        .tdserial {
+            width: 80px;
+            height: 0px;  text-align: center;
+            
+        }
+
+
+        .tdcomponent {
+            width: 100px;
+            height: 0px;  text-align: center;
+        }
+
+        .tdspindle {
+            width: 100px;
+            height: 0px;  text-align: center;
+        }
+
+        .tdresult {
+            width: 90px;
+            height: 0px;  text-align: center;
+        }
+
+
+        .listviewdynamicdata {
+          padding:0px;
+          margin:0px;
+            text-align: center;
+           color:black;
+         
+           
+        }
+
+      .innerlistview, .listviewdynamicheader, .innerlistviewtable {
+           width:100%;
+            text-align: center;
+            word-wrap: break-word; /* Allow wrapping of long words */
+            overflow: hidden; /* Hide overflowing content */
+            text-overflow: ellipsis; /* Add ellipsis for truncated content */
+            white-space: normal;
+           
+            padding: 0px;
+            margin: 0px;
+        }
+      
+      .listviewtable{
+          background-color:white;
+          color:black;
+          
+      }
+
+        .listviewtable > tbody > tr:nth-child(2) td{
+              background-color:#0e273f; /* Green for main headers */
+    color: white  !important;
+    padding:0px;
+    margin:0px;
+        }
+               .listviewtable > tbody > tr:nth-child(1)  td{
+          background-color:#0e273f; /* Green for main headers */
+color: white !important;
+ padding:0px;
+ margin:0px;
+    }
+          
+           
+          
         .cellinput {
             width: 180px;
             height: 40px; /*                font-size:30px;*/
@@ -342,41 +422,6 @@
             padding-top: 2px;
         }
 
-        .grid-table {
-            width: 82%;
-            border-collapse: collapse;
-            margin-top: 48px;
-        }
-
-            .grid-table th, .grid-table td {
-                padding: 10px;
-                text-align: center;
-                border: 1px solid #ddd;
-            }
-
-            .grid-table th {
-                background-color: #0e273f; /* Green for headers */
-                color: white;
-            }
-
-            .grid-table td {
-                background-color: white;
-                color: black;
-            }
-
-            /* Styling for sub-column headers (Top, Bottom) */
-
-
-            /* Style for dynamic columns */
-            .grid-table td {
-                text-align: center;
-            }
-
-            /* Additional spacing for headers */
-            .grid-table th {
-                text-align: center;
-            }
-
 
         #exportbtn {
             background-color: forestgreen;
@@ -393,10 +438,6 @@
             border-radius: 5px;
             height: 50px;
         }
-        /*
-        .multiselect-container {
-            height: 100vh !important
-        }*/
     </style>
 </head>
 <body>
@@ -476,7 +517,7 @@
                 </asp:TableCell>
                 <asp:TableCell CssClass="cellnamechar">Characteristic</asp:TableCell>
                 <asp:TableCell CssClass="listcss">
-                    <asp:ListBox ID="lbxCharacteristic" runat="server" CssClass="form-control" Syle="color:black" SelectionMode="Multiple"></asp:ListBox>
+                    <asp:ListBox ID="lbxCharacteristic" runat="server" CssClass="form-control" SelectionMode="Multiple"></asp:ListBox>
 
                 </asp:TableCell>
             </asp:TableRow>
@@ -496,118 +537,61 @@
                 <asp:TableCell CssClass="cellname">Status</asp:TableCell>
                 <asp:TableCell CssClass="listcss">
                     <asp:ListBox ID="lbxStatus" runat="server" CssClass="form-control" SelectionMode="Multiple"></asp:ListBox>
-
                 </asp:TableCell>
                 <asp:TableCell CssClass="btn">
                     <asp:Button runat="server" ID="viewbtn" Text="View" OnClick=" ViewButton_Click" />
-                    <asp:Button runat="server" ID="exportbtn" Text="Export" />
+                    <asp:Button runat="server" ID="exportbtn" Text="Export" OnClick="btnExport_Click" />
                 </asp:TableCell>
             </asp:TableRow>
         </asp:Table>
-
         <%--  <asp:Label ID="lblMessage" runat="server" CssClass="message" Visible="false"></asp:Label>--%>
-        <asp:ListView ID="listview1" ItemPlaceholderID="itemPlaceHolder" runat="server" OnItemDataBound="listview1_ItemDataBound" OnDataBound="listview1_DataBound">
+        <asp:ListView ID="listview1" ItemPlaceholderID="itemPlaceHolder" runat="server" class="grid-table" >
             <LayoutTemplate>
-                <table class="grid-table">
-                    <thead>
-                        <tr>
-                            <th rowspan="2">Date</th>
-                            <th rowspan="2">Shift</th>
-                            <th rowspan="2">Component</th>
-                            <th rowspan="2">Serial No.</th>
-
-                            <!-- Dynamic headers placeholder -->
-                            <td>
-                                <asp:ListView runat="server" ID="phDynamicHeaders" ItemPlaceholderID="phDynamicHeaderItem" OnItemDataBound="phDynamicHeaders_ItemDataBound">
-                                    <LayoutTemplate>
-                                        <table>
-                                            <tr>
-                                                <th runat="server" id="phDynamicHeaderItem"></th>
-                                            </tr>
-                                        </table>
-                                    </LayoutTemplate>
-                                    <ItemTemplate>
-                                        <asp:Literal ID="headerPlaceHolder" runat="server" />
-                                        <asp:ListView ID="phDynamicSubHeaders" runat="server" ItemPlaceholderID="phDynamicSubHeaderItem"
-                                            OnItemDataBound="phDynamicSubHeaders_ItemDataBound">
-                                            <LayoutTemplate>
-                                                <th runat="server" id="phDynamicSubHeaderItem" />
-                                            </LayoutTemplate>
-                                            <ItemTemplate>
-                                                <th>
-                                                    <asp:Literal ID="subHeaderPlaceHolder" runat="server" />
-                                                </th>
-                                            </ItemTemplate>
-                                        </asp:ListView>
-                                        <%-- <th><%# Eval("RenderData") %></th>--%>
-                                    </ItemTemplate>
-                                </asp:ListView>
-                            </td>
-
-                            <%--  <asp:ListView runat="server" ID="phDynamicHeaders" ItemPlaceholderID="phDynamicHeaderItem" OnItemDataBound="phDynamicHeaders_ItemDataBound">
-                                <LayoutTemplate>
-
-                                    <th runat="server" id="phDynamicHeaderItem"></th>
-
-
-                                </LayoutTemplate>
-                                <ItemTemplate>
-                                    <asp:Literal ID="headerPlaceHolder" runat="server" />
-                                    <asp:ListView ID="phDynamicSubHeaders" runat="server" ItemPlaceholderID="phDynamicSubHeaderItem"
-                                        OnItemDataBound="phDynamicSubHeaders_ItemDataBound">
-                                        <LayoutTemplate>
-
-                                            <th runat="server" id="phDynamicSubHeaderItem" />
-                                        </LayoutTemplate>
-                                        <ItemTemplate>
-                                            <th>
-                                                <asp:Literal ID="subHeaderPlaceHolder" runat="server" />
-                                            </th>
-                                        </ItemTemplate>
-                                    </asp:ListView>
-                                    <%-- <th><%# Eval("RenderData") %></th>--%>
-                                </ItemTemplate>
-                            </asp:ListView>--%>
-
-                            <!-- Static columns -->
-                            <th rowspan="2">Spindle Load</th>
-                            <th rowspan="2">Result</th>
-                            <th rowspan="2">Remark</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <asp:PlaceHolder ID="itemPlaceHolder" runat="server" />
-                    </tbody>
+                <table id="ListViewTable" class="listviewtable">
+                    <tr class="listviewrow" runat="server" id="itemplaceholder"></tr>
                 </table>
             </LayoutTemplate>
             <ItemTemplate>
-
-                <tr>
-                    <!-- Static fields -->
-                    <td class="static"><%# Eval("Date") %></td>
-                    <td class="static"><%# Eval("Shift") %></td>
-                    <td class="static"><%# Eval("ComponentID") %></td>
-                    <td class="static"><%# Eval("SerialNo") %></td>
-
-                    <!-- Dynamic data placeholder -->
-                    <asp:ListView runat="server" ID="phDynamicData" ItemPlaceholderID="phDynamicDataItem" OnItemDataBound="phDynamicData_ItemDataBound">
-                        <LayoutTemplate>
-
-                            <td runat="server" id="phDynamicDataItem"></td>
-
-                        </LayoutTemplate>
-                        <ItemTemplate>
-                            <td>
-                                <asp:Literal ID="DataPlaceHolder" runat="server" /></td>
-                        </ItemTemplate>
-                    </asp:ListView>
-
-                    <!-- Static fields -->
-                    <td class="static"><%# Eval("SpindleLoad") %></td>
-                    <td class="static"><%# Eval("Result") %></td>
-                    <td class="static"><%# Eval("Remarks") %></td>
-                </tr>
-
+                <tr class="listviewrow">
+                    <td runat="server" rowspan='<%# Eval("RowSpan") %>' visible='<%# Eval("tdVisible") %>' class="tddate">
+                        <asp:Label runat="server" ID="Date" Text='<%# Eval("Date") %>'></asp:Label>
+                    </td>
+                    <td runat="server" rowspan='<%# Eval("RowSpan") %>' visible='<%# Eval("tdVisible") %>' class="tdshift">
+                        <asp:Label runat="server" ID="Shift" Text='<%# Eval( "Shift") %>'></asp:Label>
+                    </td>
+                    <td runat="server" rowspan='<%# Eval("RowSpan") %>' visible='<%# Eval("tdVisible") %>' class="tdcomponent">
+                        <asp:Label runat="server" ID="ComponentID" Text='<%# Eval("ComponentID") %>'></asp:Label>
+                    </td>
+                    <td runat="server" rowspan='<%# Eval("RowSpan") %>' visible='<%# Eval("tdVisible") %>' class="tdserial">
+                        <asp:Label runat="server" ID="SerialNo" Text='<%# Eval( "SerialNo") %>'></asp:Label>
+                    </td>
+                    <td class="innerlistview">
+                        <asp:ListView runat="server" ID="lvInnerListView" ItemPlaceholderID="innerLVItemplaceholder" DataSource='<%# Eval("listviewdata") %>' >
+                            <LayoutTemplate>
+                                <table class="innerlistviewtable">
+                                    <tr class="listviewdynamic" runat="server" >
+                                        <td id="innerLVItemplaceholder" >
+                                        </td>
+                                    </tr>
+                                </table>
+                            </LayoutTemplate>
+                            <ItemTemplate>
+                                <td colspan='<%# Eval("tdColSpan") %>' class="listviewdynamicdata" style='<%# Eval("backColor") %>'>
+                                    <asp:Label ID="CharacteristicValueLabel" runat="server" Text='<%# Eval("CharacteristicValue") %>'></asp:Label>
+                                </td>
+                            </ItemTemplate>
+                        </asp:ListView>
+                    </td>
+                    <td runat="server" rowspan='<%# Eval("RowSpan") %>' visible='<%# Eval("tdVisible") %>' class="tdspindle">
+                        <asp:Label runat="server" ID="SpindleLoad" Text='<%# Eval("SpindleLoad") %>'></asp:Label>
+                    </td>
+                    <td runat="server" rowspan='<%# Eval("RowSpan") %>' visible='<%# Eval("tdVisible") %>' class="tdresult">
+                        <asp:Label runat="server" ID="Result" Text='<%# Eval( "Result") %>'></asp:Label>
+                    </td>
+                    <td runat="server" rowspan='<%# Eval("RowSpan") %>' visible='<%# Eval("tdVisible") %>' class="tdremark">
+                        <asp:Label runat="server" ID="Remarks" Text='<%# Eval( "Remarks") %>'></asp:Label>
+                    </td>
+                    </tr>
             </ItemTemplate>
             <EmptyDataTemplate>
                 <table>

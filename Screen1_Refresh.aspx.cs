@@ -13,14 +13,14 @@ namespace ASP_Evaluation_Task
 {
     public partial class Screen1_Refresh : System.Web.UI.Page
     {
-        private static int currentRowIndex = 0;
+       // private static int currentRowIndex = 0;
         private static Random random = new Random();
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            Response.Cache.SetCacheability(HttpCacheability.NoCache);
-            Response.Cache.SetExpires(DateTime.UtcNow.AddDays(-1));
-            Response.Cache.SetNoStore();
+            //Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            //Response.Cache.SetExpires(DateTime.UtcNow.AddDays(-1));
+            //Response.Cache.SetNoStore();
 
             // Bind data on every request (including refresh)
             if (!IsPostBack)
@@ -48,11 +48,8 @@ namespace ASP_Evaluation_Task
                 dict["Rejection_Qty"] = random.Next(1, 1000); //row["Rejection_Qty"];
                 dict["Rework_Qty"] = random.Next(1, 1000);//row["Rework_Qty"];
                 //dict["Rework_www"] = random.Next(1, 1000);
-
                 rows.Add(dict);
-
             }
-
             //    List<Dictionary<string, object>> hardcodedRows = new List<Dictionary<string, object>>()
             //{
             //    new Dictionary<string, object> { { "Cumulative Target Qty", 3300 }, { "Cumulative Production Qty", 100 }, { "Shortfall Qty", 29 }, { "Rejection Qty", 45.67 }, { "Rework Qty", 286 },{"work",12 } },
