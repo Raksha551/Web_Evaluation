@@ -230,14 +230,13 @@
                                     {
                                         type: 'column',
                                         name: 'Downtime (HH:MM)',
-                                      
+                                        reversed: 'true',
                                         data: chartData.map(item => ({
                                             y: Math.max(...chartData.map(c => c.downtimeRaw)) - item.downtimeRaw, //reversing the order
                                             downtimeFormatted: item.downtimeFormatted,
 
                                         })),
-
-                                        dataLabels: {
+                                            dataLabels: {
                                             enabled: true,
                                             formatter: function () {
                                                 return this.point.downtimeFormatted;
