@@ -42,6 +42,7 @@ namespace ASP_Evaluation_Task
             ConnectionString = WebConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
 
         }
+        #region Get DownTime Data
         public DataTable GetDowntimeData(string startTime, string endTime, string machineID = "", string downID = "", string matrixType = "DLoss_By_Catagory", string plantID = "", string exclude = "", string groupID = "")
         {
             
@@ -78,6 +79,9 @@ namespace ASP_Evaluation_Task
             }
             return dt;
         }
+        #endregion
+
+        #region get random values to update screen
         public DataTable GetRandomDataScreen(string dateTime = "", string param = "")
         {
             SqlConnection con = new SqlConnection(connectionString);
@@ -105,6 +109,9 @@ namespace ASP_Evaluation_Task
             }
             return dt;
         }
+        #endregion
+
+        #region populate machine ids
         public static List<string> Populatemachineid()
         {
             SqlConnection con = new SqlConnection(ConnectionString);
@@ -135,6 +142,9 @@ namespace ASP_Evaluation_Task
             }
             return list;
         }
+        #endregion
+
+        #region populate component
         public static List<string> Populatecomponent(string machineID)
         {
             SqlConnection con = new SqlConnection(ConnectionString);
@@ -166,6 +176,9 @@ namespace ASP_Evaluation_Task
             }
             return list;
         }
+        #endregion
+
+        #region Populate characteristic drop down
         public static  List<string> PopulateCharacteristicdropdown(string machineID, string componentID, string operationNo)
         {
             SqlConnection con = new SqlConnection(ConnectionString);
@@ -201,7 +214,9 @@ namespace ASP_Evaluation_Task
             }
             return list;
         }
+        #endregion
 
+        #region populate operation drop down
         public static List<string> PopulateOperationdropdown(string componentID)
         {
             SqlConnection con = new SqlConnection(ConnectionString);
@@ -234,7 +249,9 @@ namespace ASP_Evaluation_Task
                 return list;
           
         }
+        #endregion
 
+        #region fetch DB data
         public DataTable fetchDBdata(string machineID, string componentID, string operationNo, string serialNo, string[] status, string fromDate, string toDate, string[] dimension)
         {
             SqlConnection conn = new SqlConnection(ConnectionString);
@@ -269,5 +286,6 @@ namespace ASP_Evaluation_Task
             }
             return dt;
         }
+        #endregion
     }
 }

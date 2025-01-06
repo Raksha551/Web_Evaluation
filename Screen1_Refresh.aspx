@@ -74,7 +74,7 @@
         #currentDate {
             font-size: 30px;
             font-weight: bold;
-            padding-right: 55px;
+            padding-right: 60px;
             padding-left: 50px;
         }
 
