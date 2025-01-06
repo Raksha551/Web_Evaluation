@@ -5,29 +5,44 @@
 <html>
 <head runat="server">
     <title>TPM-Trak Analytics</title>
-    <%--<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />--%>
-    <%-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>--%>
-    <%-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>--%>
-    <%--  <link href="c:\users\devteam\documents\demo_c#\web_asp.net\asp_training_project\asp_evaluation_task\lib\bootstrap\css\bootstrap.min.css" rel="stylesheet" />
-    <script src="c:\users\devteam\documents\demo_c#\web_asp.net\asp_training_project\asp_evaluation_task\lib\bootstrap\js\bootstrap.min.js"></script>
-    <link href="c:\users\devteam\documents\demo_c#\web_asp.net\asp_training_project\asp_evaluation_task\lib\bootstrap-multiselect\css\bootstrap-multiselect.min.css" rel="stylesheet" />
-    <script src="c:\users\devteam\documents\demo_c#\web_asp.net\asp_training_project\asp_evaluation_task\lib\bootstrap-multiselect\js\bootstrap-multiselect.min.js"></script>--%>
-    <%--<link href="file:///c:\users\devteam\documents\demo_c#\web_asp.net\asp_training_project\asp_evaluation_task\lib\bootstrap\css\bootstrap.min.css" rel="stylesheet" />--%>
-
-    <%--  <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-
-    <script src="lib/bootstrap/js/bootstrap.min.js"></script>
-
-    --%>
-
-    <script src="lib/jquery/jquery.min.js"></script>
-    <link href="lib/bootstrap.min.css" rel="stylesheet" />
-    <script src="lib/bootstrap.min.js"></script>
 
 
+
+      
+  <%--  <script src="lib/jquery/jquery.min.js"></script>
+   <%-- <script src="lib/bootstrap-version/jquery-2.1.1.min.js"></script>--%>
+   <%-- <link href="lib/bootstrap.min.css" rel="stylesheet" />
+    <script src="lib/bootstrap.min.js"></script>--%>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js" integrity="sha512-jGsMH83oKe9asCpkOVkBnUrDDTp8wl+adkB2D+//JtlxO4SrLoJdhbOysIFQJloQFD+C4Fl1rMsQZF76JjV0eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <%--  <link href="lib/bootstrap-version/bootstrap.min.css" rel="stylesheet" />--%>
+    <link href="lib/bootstrap-version/bootstrap-3.3.7/bootstrap-3.3.7/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <script src="lib/bootstrap-version/bootstrap.min.js"></script>
+ 
 
     <link href="lib/bootstrap-multiselect/css/bootstrap-multiselect.min.css" rel="stylesheet" />
     <script src="lib/bootstrap-multiselect/js/bootstrap-multiselect.min.js"></script>
+ 
+<%-- <script src="lib/bootstrap-version/moment-with-locales.js"></script>
+    <link href="lib/bootstrap-version/bootstrap-datetimepicker.css" rel="stylesheet" />
+    <script src="lib/bootstrap-version/bootstrap-datetimepicker.js"></script>--%>
+  
+<%--   <script src="lib/bootstrap-version/moment.js"></script>
+  <link rel="stylesheet" href="  https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.42/css/bootstrap-datetimepicker-standalone.min.css.map" integrity="sha512-oJCC5jmVZu9Mpf2HYBc5DR5S9sc9jRFpbKufmhDg+2IFMb7pri6wqDKilJEZMOyD02m+lldHzXZWoyDGjZ0V8A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+ --%>
+
+   <%-- <link href="lib/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet" />
+<script src="lib/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>--%>
+
+
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js" integrity="sha512-1V1LfkdFb5dlSJjEImkfBwiJhuqBLoWjWWYKI3kMvjOFm3y43yzHhyp1Swz31R7k2GOfVFKFA+7UDZkTdTBIqA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css" integrity="sha512-cSe3D7ePd2MI6J8MDnEAi52LVHpaSadXU+ML3bIOZepIdDLppMDBrkKtsgLe7WFmBji+HgGeY8o8ZFe0YWbfNQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker-standalone.min.css" integrity="sha512-7hJUjGwcXDB2zjYRCbqKpea+eoThf9VLF5x17Yp5AY7tGYgVAuPWyX+n917V5PYFVahk2bHC/ZPcSL2HpyJupQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js" integrity="sha512-JcceycVPblKG5oooLUNXGY7KhAvXxzppH+n7CFZMCb1Uj1hZzysaWaVsOukaZpb/qPL9zFGR66DDfTTxlVB5qw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
 
 
 
@@ -37,16 +52,23 @@
             $('#<%= lbxCharacteristic.ClientID %>').multiselect({
                 includeSelectAllOption: true,
                 buttonWidth: '160px',
-
-
-
-
             });
 
             $('#<%= lbxStatus.ClientID %>').multiselect({
                 includeSelectAllOption: true
 
             });
+    
+            $("#txtFromDate").datetimepicker({
+                format: 'DD-MM-YYYY HH:mm:ss',
+                locale: 'en-US',
+                
+            });
+            $('[id$=txtToDate]').datetimepicker({
+                format: 'DD-MM-YYYY HH:mm:ss',
+                locale: 'en-US',
+            });
+        
         });
     </script>
     <style>
@@ -56,6 +78,7 @@
             padding: 0;
             text-align: center;
             background-color: #0a0c3f;
+            table-layout: fixed;
         }
 
 
@@ -71,7 +94,7 @@
             align-items: center;
             background-color: #486ab7;
             color: white;
-            height: 80px;
+            height: 68px;
             padding: 0;
             position: fixed;
             top: 0;
@@ -82,8 +105,8 @@
         }
 
         .header-left {
-            width: 120px;
-            height: 80px;
+            width: 100px;
+            height: 65px;
             flex-shrink: 0;
             margin: 0;
             border-radius: 10px;
@@ -120,19 +143,10 @@
         }
 
         .header-icon {
-            width: 70px;
-            height: 70px;
+            width: 40px;
+            height: 40px;
             cursor: pointer;
             display: inline-flex;
-        }
-
-
-
-        #r, #h {
-            padding: 16px;
-            justify-content: center;
-            align-content: center;
-            align-items: center;
         }
 
         .right {
@@ -158,7 +172,7 @@
             justify-content: left;
             font-size: 16px;
             height: 100%;
-            width: 13%;
+            width: 220px;
             position: fixed;
             text-align: left;
             display: flex;
@@ -187,8 +201,8 @@
         }
 
         #rightlogo {
-            width: 120px;
-            height: 80px;
+            width: 100px;
+            height: 65px;
             flex-shrink: 0;
             margin: 0;
             border-radius: 10px;
@@ -204,55 +218,42 @@
 
         /* Default styles for the table */
         table {
-            width: 100%; /* Adjust as needed */
+            /* Adjust as needed */
             border-collapse: collapse;
             margin-top: 100px;
-            margin: 40px 18%;
             position: relative;
-            margin-left: 15%;
-            width: 50%;
             border: 1px solid #DADBDD;
             table-layout: fixed;
-            color: #DADBDD;
+            color: black;
+
         }
+            table th, table td {
+                border: 1px solid #ddd;
+                padding: 6px;
+                text-align: left;
+            }
 
-
-
-        .scrollable-gridview-container {
-            max-height: 400px; /* Set maximum height for vertical scrolling */
-            overflow-y: auto; /* Enable vertical scrolling */
-            overflow-x: auto; /* Enable horizontal scrolling for wide columns */
-            border: 1px solid #ddd; /* Add a border for visibility */
-        }
-
-
-
-
-
-        table th, table td {
-            border: 1px solid #ddd;
-            padding: 6px;
-            text-align: left;
-        }
-
-        table td {
-            height: 50px;
-            width: 180px;
-        }
+            table td {
+                height: 50px;
+               
+            }
 
         table {
             margin-top: 0px;
+            table-layout: fixed; /* Enforce fixed layout for consistent column widths */
+            border-collapse: collapse;
+            
         }
 
         #listview1 {
-          
             border-collapse: collapse;
             margin-top: 48px;
+            table-layout: fixed; /* Enforce fixed layout for consistent column widths */
         }
 
         .listviewtable {
-             width:100%;
             text-align: center;
+            table-layout: fixed; /* Enforce fixed layout for consistent column widths */
         }
 
         .listviewrow {
@@ -276,88 +277,112 @@
             color: black;
         }
 
-     
-
         .tddate {
-            width: 90px;
+            width: 95px;
             height: 0px;
-              text-align: center;
-              
+            text-align: center;
         }
 
         .tdshift {
-            width: 50px;
-            height: 0px;  text-align: center;
-           
+            width: 58px;
+            height: 0px;
+            text-align: center;
         }
-
-
 
         .tdserial {
             width: 80px;
-            height: 0px;  text-align: center;
-            
+            height: 0px;
+            text-align: center;
         }
-
 
         .tdcomponent {
             width: 100px;
-            height: 0px;  text-align: center;
+            height: 0px;
+            text-align: center;
         }
 
         .tdspindle {
             width: 100px;
-            height: 0px;  text-align: center;
+            height: 0px;
+            text-align: center;
         }
 
         .tdresult {
-            width: 90px;
-            height: 0px;  text-align: center;
+            width: 80px;
+            height: 0px;
+            text-align: center;
         }
 
+        .tdremark {
+            text-align: center !important;
+            width: 180px;
+        }
 
         .listviewdynamicdata {
-          padding:0px;
-          margin:0px;
+            padding: 0px;
+            margin: 0px;
             text-align: center;
-           color:black;
-         
-           
+            color: black;
+            table-layout: fixed; /* Enforce fixed layout for consistent column widths */
+            border-collapse: collapse;
         }
 
-      .innerlistview, .listviewdynamicheader, .innerlistviewtable {
-           width:100%;
+        .innerlistview {
             text-align: center;
             word-wrap: break-word; /* Allow wrapping of long words */
             overflow: hidden; /* Hide overflowing content */
             text-overflow: ellipsis; /* Add ellipsis for truncated content */
             white-space: normal;
-           
+            padding: 0px;
+            margin: 0px;
+            table-layout: fixed; /* Enforce fixed layout for consistent column widths */
+            border-collapse: collapse;
+        }
+
+        .listviewdynamicheader {
+            text-align: center;
+            word-wrap: break-word; /* Allow wrapping of long words */
+            overflow: hidden; /* Hide overflowing content */
+            text-overflow: ellipsis; /* Add ellipsis for truncated content */
+            white-space: normal;
+            table-layout: fixed; /* Enforce fixed layout for consistent column widths */
+            border-collapse: collapse;
             padding: 0px;
             margin: 0px;
         }
-      
-      .listviewtable{
-          background-color:white;
-          color:black;
-          
-      }
 
-        .listviewtable > tbody > tr:nth-child(2) td{
-              background-color:#0e273f; /* Green for main headers */
-    color: white  !important;
-    padding:0px;
-    margin:0px;
+        .innerlistviewtable {
+            text-align: center;
+            word-wrap: break-word; /* Allow wrapping of long words */
+            overflow: hidden; /* Hide overflowing content */
+            text-overflow: ellipsis; /* Add ellipsis for truncated content */
+            white-space: normal;
+            table-layout: fixed; /* Enforce fixed layout for consistent column widths */
+            border-collapse: collapse;
+            padding: 0px;
+            margin: 0px;
         }
-               .listviewtable > tbody > tr:nth-child(1)  td{
-          background-color:#0e273f; /* Green for main headers */
-color: white !important;
- padding:0px;
- margin:0px;
-    }
-          
-           
-          
+
+        .listviewtable {
+            background-color: white;
+            color: black;
+        }
+
+            .listviewtable > tbody > tr:nth-child(2) td {
+                background-color: #0e273f; /* Green for sub headers */
+                color: white !important;
+                padding: 0px;
+                margin: 0px;
+                border: 1px solid #ddd;
+            }
+
+            .listviewtable > tbody > tr:nth-child(1) td {
+                background-color: #0e273f; /* Green for main headers */
+                color: white !important;
+                padding: 0px;
+                margin: 0px;
+            }
+
         .cellinput {
             width: 180px;
             height: 40px; /*                font-size:30px;*/
@@ -369,26 +394,29 @@ color: white !important;
             width: 80px;
             height: 40px;
             color: black;
+            margin-left: 4px;
         }
 
         .celllength {
             width: 200px;
             height: 40px;
-            color: black;
+           
+            margin-left: 4px;
         }
 
         .cellLong {
             width: 210px;
-            color: black;
+           
+        }
+        .cellLongdate{
+             width: 210px;
+ color: black;
         }
 
-        .cellinputchar, .cellinputstatus {
-            font-size: 16px;
-            width: 170px;
-            max-height: 100px;
-            overflow-y: auto;
-        }
 
+         #txtFromDate{
+     color:black;
+ }
         .serialholder {
             width: 90px;
         }
@@ -398,6 +426,7 @@ color: white !important;
             width: 110px; /* Adjust this value to set your desired width */
             text-align: left; /* Align text to the left if needed */
             padding: 5px;
+            color :#DADBDD;
         }
 
         .cellnamechar {
@@ -405,6 +434,7 @@ color: white !important;
             width: 130px; /* Adjust this value to set your desired width */
             text-align: left; /* Align text to the left if needed */
             padding: 5px;
+            color :#DADBDD;
         }
 
         .dynamic-column {
@@ -437,8 +467,44 @@ color: white !important;
             backface-visibility: visible;
             border-radius: 5px;
             height: 50px;
+            padding: 6px;
+            width: 180px;
         }
+
+        table th,
+        table td {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .innerlistviewtable, .listviewtable {
+            width: 100%; /* Synchronize widths */
+            table-layout: fixed;
+        }
+
+/*        .scrollable-table-wrapper {
+            height: 500px;
+            overflow: scroll;
+            position: absolute;
+        }*/
+
+        .filtertable {
+            margin-left: 15%;
+            margin-bottom: 40px;
+            background-color: #0a0c3f;
+            width: 50%;
+           
+        }
+
+        .listviewtable {
+            margin-left: 15%;
+            overflow: scroll;
+            position: absolute;
+            width: 84%;
+        }
+       
     </style>
+    
 </head>
 <body>
     <form id="form1" runat="server">
@@ -458,13 +524,8 @@ color: white !important;
                         <img src="./Images/profile-user.png" class="header-icon" id="h" alt="Home Icon" />
                         <img src="./Images/AmiTLogo.jpg" class="header-icon" id="rightlogo" alt="AmiT Loga" />
                     </div>
-
                 </div>
             </div>
-
-
-
-
             <div class="sidebar">
                 <div class="sidebar-list">
                     <img src="./Images/list.png" class="sidebar-icons" runat="server" alt="Menu Icon" />
@@ -493,9 +554,8 @@ color: white !important;
                     <a href="#" class="sidebar-items" id="settings">Settings</a>
                 </div>
             </div>
-
         </div>
-        <asp:Table runat="server">
+        <asp:Table CssClass="filtertable" runat="server">
             <asp:TableRow>
                 <asp:TableCell CssClass="cellname">Machine</asp:TableCell>
                 <asp:TableCell CssClass="cellLong">
@@ -518,17 +578,16 @@ color: white !important;
                 <asp:TableCell CssClass="cellnamechar">Characteristic</asp:TableCell>
                 <asp:TableCell CssClass="listcss">
                     <asp:ListBox ID="lbxCharacteristic" runat="server" CssClass="form-control" SelectionMode="Multiple"></asp:ListBox>
-
                 </asp:TableCell>
             </asp:TableRow>
             <asp:TableRow>
                 <asp:TableCell CssClass="cellname">From Date</asp:TableCell>
-                <asp:TableCell CssClass="cellLong">
-                    <asp:TextBox runat="server" ID="txtFromDate" CssClass="celllength" TextMode="DateTimeLocal" Style="color: black"></asp:TextBox>
+                <asp:TableCell CssClass="cellLongdate">
+                    <asp:TextBox runat="server" ID="txtFromDate" CssClass="celllength" placeholder="From Date"  Style="color: black"  AutoCompleteType="Disabled" ></asp:TextBox>
                 </asp:TableCell>
                 <asp:TableCell CssClass="cellname">To Date</asp:TableCell>
                 <asp:TableCell CssClass="cellLong">
-                    <asp:TextBox runat="server" ID="txtToDate" CssClass="celllength" TextMode="DateTimeLocal" Text='<%# DateTime.Now.ToString("yyyy-MM-ddTHH:mm:SS") %>'></asp:TextBox>
+                    <asp:TextBox runat="server" ID="txtToDate" CssClass="celllength" placeholder="To Date"  Style="color: black"  AutoCompleteType="Disabled"></asp:TextBox>
                 </asp:TableCell>
                 <asp:TableCell CssClass="cellname">Serial No.</asp:TableCell>
                 <asp:TableCell CssClass="serialholder">
@@ -545,63 +604,70 @@ color: white !important;
             </asp:TableRow>
         </asp:Table>
         <%--  <asp:Label ID="lblMessage" runat="server" CssClass="message" Visible="false"></asp:Label>--%>
-        <asp:ListView ID="listview1" ItemPlaceholderID="itemPlaceHolder" runat="server" class="grid-table" >
-            <LayoutTemplate>
-                <table id="ListViewTable" class="listviewtable">
-                    <tr class="listviewrow" runat="server" id="itemplaceholder"></tr>
-                </table>
-            </LayoutTemplate>
-            <ItemTemplate>
-                <tr class="listviewrow">
-                    <td runat="server" rowspan='<%# Eval("RowSpan") %>' visible='<%# Eval("tdVisible") %>' class="tddate">
-                        <asp:Label runat="server" ID="Date" Text='<%# Eval("Date") %>'></asp:Label>
-                    </td>
-                    <td runat="server" rowspan='<%# Eval("RowSpan") %>' visible='<%# Eval("tdVisible") %>' class="tdshift">
-                        <asp:Label runat="server" ID="Shift" Text='<%# Eval( "Shift") %>'></asp:Label>
-                    </td>
-                    <td runat="server" rowspan='<%# Eval("RowSpan") %>' visible='<%# Eval("tdVisible") %>' class="tdcomponent">
-                        <asp:Label runat="server" ID="ComponentID" Text='<%# Eval("ComponentID") %>'></asp:Label>
-                    </td>
-                    <td runat="server" rowspan='<%# Eval("RowSpan") %>' visible='<%# Eval("tdVisible") %>' class="tdserial">
-                        <asp:Label runat="server" ID="SerialNo" Text='<%# Eval( "SerialNo") %>'></asp:Label>
-                    </td>
-                    <td class="innerlistview">
-                        <asp:ListView runat="server" ID="lvInnerListView" ItemPlaceholderID="innerLVItemplaceholder" DataSource='<%# Eval("listviewdata") %>' >
-                            <LayoutTemplate>
-                                <table class="innerlistviewtable">
-                                    <tr class="listviewdynamic" runat="server" >
-                                        <td id="innerLVItemplaceholder" >
-                                        </td>
-                                    </tr>
-                                </table>
-                            </LayoutTemplate>
-                            <ItemTemplate>
-                                <td colspan='<%# Eval("tdColSpan") %>' class="listviewdynamicdata" style='<%# Eval("backColor") %>'>
-                                    <asp:Label ID="CharacteristicValueLabel" runat="server" Text='<%# Eval("CharacteristicValue") %>'></asp:Label>
-                                </td>
-                            </ItemTemplate>
-                        </asp:ListView>
-                    </td>
-                    <td runat="server" rowspan='<%# Eval("RowSpan") %>' visible='<%# Eval("tdVisible") %>' class="tdspindle">
-                        <asp:Label runat="server" ID="SpindleLoad" Text='<%# Eval("SpindleLoad") %>'></asp:Label>
-                    </td>
-                    <td runat="server" rowspan='<%# Eval("RowSpan") %>' visible='<%# Eval("tdVisible") %>' class="tdresult">
-                        <asp:Label runat="server" ID="Result" Text='<%# Eval( "Result") %>'></asp:Label>
-                    </td>
-                    <td runat="server" rowspan='<%# Eval("RowSpan") %>' visible='<%# Eval("tdVisible") %>' class="tdremark">
-                        <asp:Label runat="server" ID="Remarks" Text='<%# Eval( "Remarks") %>'></asp:Label>
-                    </td>
-                    </tr>
-            </ItemTemplate>
-            <EmptyDataTemplate>
-                <table>
-                    <tr>
-                        <td style="font-size: 30px; color: white; padding: 10px;">Sorry!!! there is no data available for given user input</td>
-                    </tr>
-                </table>
-            </EmptyDataTemplate>
-        </asp:ListView>
+        <asp:ScriptManager runat="server"></asp:ScriptManager>
+        <asp:UpdatePanel runat="server">
+            <ContentTemplate>
+                   <asp:ListView ID="listview1" ItemPlaceholderID="itemPlaceHolder" runat="server" class="grid-table">
+       <LayoutTemplate>
+           <div class="scrollable-table-wrapper">
+               <table id="ListViewTable" class="listviewtable">
 
+                   <tr class="listviewrow" runat="server" id="itemplaceholder"></tr>
+               </table>
+           </div>
+       </LayoutTemplate>
+       <ItemTemplate>
+           <tr class="listviewrow">
+               <td runat="server" rowspan='<%# Eval("RowSpan") %>' visible='<%# Eval("tdVisible") %>' class="tddate">
+                   <asp:Label runat="server" ID="Date" Text='<%# Eval("Date") %>'></asp:Label>
+               </td>
+               <td runat="server" rowspan='<%# Eval("RowSpan") %>' visible='<%# Eval("tdVisible") %>' class="tdshift">
+                   <asp:Label runat="server" ID="Shift" Text='<%# Eval( "Shift") %>'></asp:Label>
+               </td>
+               <td runat="server" rowspan='<%# Eval("RowSpan") %>' visible='<%# Eval("tdVisible") %>' class="tdcomponent">
+                   <asp:Label runat="server" ID="ComponentID" Text='<%# Eval("ComponentID") %>'></asp:Label>
+               </td>
+               <td runat="server" rowspan='<%# Eval("RowSpan") %>' visible='<%# Eval("tdVisible") %>' class="tdserial">
+                   <asp:Label runat="server" ID="SerialNo" Text='<%# Eval( "SerialNo") %>'></asp:Label>
+               </td>
+               <td class="innerlistview">
+                   <asp:ListView runat="server" ID="lvInnerListView" ItemPlaceholderID="innerLVItemplaceholder" DataSource='<%# Eval("listviewdata") %>'>
+                       <LayoutTemplate>
+                           <table class="innerlistviewtable">
+                               <tr class="listviewdynamic" runat="server">
+                                   <td id="innerLVItemplaceholder"></td>
+                               </tr>
+                           </table>
+                       </LayoutTemplate>
+                       <ItemTemplate>
+                           <td colspan='<%# Eval("tdColSpan") %>' class="listviewdynamicdata" style='<%# Eval("backColor") %>'>
+                               <asp:Label ID="CharacteristicValueLabel" runat="server" Text='<%# Eval("CharacteristicValue") %>'></asp:Label>
+                           </td>
+                       </ItemTemplate>
+                   </asp:ListView>
+               </td>
+               <td runat="server" rowspan='<%# Eval("RowSpan") %>' visible='<%# Eval("tdVisible") %>' class="tdspindle">
+                   <asp:Label runat="server" ID="SpindleLoad" Text='<%# Eval("SpindleLoad") %>'></asp:Label>
+               </td>
+               <td runat="server" rowspan='<%# Eval("RowSpan") %>' visible='<%# Eval("tdVisible") %>' class="tdresult">
+                   <asp:Label runat="server" ID="Result" Text='<%# Eval( "Result") %>'></asp:Label>
+               </td>
+               <td runat="server" rowspan='<%# Eval("RowSpan") %>' visible='<%# Eval("tdVisible") %>' class="tdremark">
+                   <asp:Label runat="server" ID="Remarks" Text='<%# Eval( "Remarks") %>'></asp:Label>
+               </td>
+           </tr>
+       </ItemTemplate>
+       <EmptyDataTemplate >
+           <table>
+               <tr>
+                   <td style="font-size: 30px; color: white; padding: 15px 20px 60px 20px; position:fixed; margin-left:30%; margin-top:8%">Sorry!!! there is no data available for the given input</td>
+               </tr>
+           </table>
+       </EmptyDataTemplate>
+   </asp:ListView>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+     
     </form>
 
 </body>

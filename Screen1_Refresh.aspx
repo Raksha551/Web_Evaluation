@@ -23,7 +23,8 @@
             align-items: center;
             background-color: #486ab7;
             color: white;
-            height: 80px;
+            height: 70px;
+            margin-bottom:0px;
             /* Remove padding */
         }
 
@@ -41,7 +42,7 @@
             padding-left: 272px;
             flex-grow: 1;
             color: white;
-            line-height: 50px;
+            line-height: 45px;
             margin: 0;
         }
 
@@ -50,7 +51,7 @@
             align-items: center;
             padding-right: 20px;
             background-color: #0056b3;
-            height: 80px;
+            height: 70px;
             width: 330px;
         }
 
@@ -62,7 +63,7 @@
         }
 
         .header-left {
-            height: 80px;
+            height: 70px;
             width: 90px;
         }
 
@@ -71,10 +72,10 @@
         }
 
         #currentDate {
-            font-size: 34px;
+            font-size: 30px;
             font-weight: bold;
             padding-right: 55px;
-            padding-left: 55px;
+            padding-left: 50px;
         }
 
         .header-icon1 {
@@ -93,24 +94,24 @@
         h5 {
             background-color: #004080;
             color: white;
-            padding: 10px 0;
+            padding: 6px 0;
             margin: 0;
-            font-size: 26px;
+            font-size: 24px;
             font-weight: bold;
+
         }
 
         /* Grid Styling for Andon Boxes */
         .andon-grid {
             display: flex; /* Use flexbox for layout */
             flex-wrap: wrap; /* Allow items to wrap to the next row */
-            column-gap: 160px; /* Add spacing between the boxes */
-            row-gap: 50px;
+            column-gap: 150px; /* Add spacing between the boxes */
+            row-gap: 35px;
             align-content: center;
             align-items: center;
             justify-content: center; /* Center-align the boxes in the row */
             padding: 44px;
-            margin: 0 auto; /* Center the container itself */
-            /* Centers items horizontally */
+           margin-top:0px;
         }
 
         .maximize-icon {
@@ -130,35 +131,38 @@
             box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
             transition: transform 0.2s ease;
             width: 420px;
-            height: 270px;
+            height: 250px;
         }
 
-            .andon-box:hover {
+/*            .andon-box:hover {
                 transform: scale(1.05);
             }
-
+*/
             .andon-box h2 {
-                font-size: 80px;
+                font-size: 84px;
                 font-weight: bold;
                 margin: 0;
                 color: #ffff00; /* Bright yellow font */
                 background-color: #0056b3;
                 border-radius: 10px;
-                padding-top: 26px;
+                padding-top: 22px;
                 text-align: center;
                 height: 120px;
+                text-shadow: 2px 2px 4px yellow;
             }
 
             .andon-box p {
                 font-size: 34px;
                 font-weight: 620;
                 text-align: center;
-                padding-top: 35px;
+                padding-top: 24px;
                 border-radius: 10px;
                 margin: 5px 0 0;
                 color: #1b1b6f; /* column-count name */
             }
-
+            .andon-box:nth-child(2) > p{
+                 padding-top: 16px;
+            }
         /* Footer */
         .auto-refresh-message {
             font-size: 12px;
@@ -173,7 +177,7 @@
             position: fixed;
             bottom: 0;
             width: 100%;
-            height: 42px;
+            height: 38px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -198,7 +202,7 @@
             padding-bottom: 16px;
             font-size: 18px;
             box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
-            width: 82%;
+            width: 80%;
             margin: 10px auto;
             text-align: center;
         }
@@ -222,13 +226,13 @@
 
 </head>
 <body>
-    <!-- Header -->
+   <form id="form1" runat="server">
     <div class="head-container">
         <img src="./Images/AmiTLogo.jpg" class="header-left" alt="Left Icon" />
         <div class="head-title1">CUMULATIVE TARGET VS ACTUAL</div>
         <div class="header-right-section">
             <div class="header-info">
-                <span id="currentDate"></span>
+                <asp:Label runat="server" id="currentDate"></asp:Label>
             </div>
             <div class="max">
                 <div class="icon-container">
@@ -242,42 +246,44 @@
     </div>
 
     <h5>KTA Spindle Tooling</h5>
+<asp:ScriptManager ID="ScriptManager1" runat="server" />
+<asp:UpdatePanel ID="upAndonData" runat="server" UpdateMode="Conditional">
+    <ContentTemplate>
+        <asp:Repeater ID="rptAndonData" runat="server">
+            <ItemTemplate>
+                <div class="andon-grid">
+                    <%# RenderDynamicBoxes(Container.DataItem) %>
+                </div>
+            </ItemTemplate>
+        </asp:Repeater>
+    </ContentTemplate>
 
-    <asp:Repeater ID="rptAndonData" runat="server">
-        <ItemTemplate>
-            <div class="andon-grid">
+    <Triggers>
+        <asp:AsyncPostBackTrigger ControlID="timerUpdate" EventName="Tick" />
+    </Triggers>
+    </asp:UpdatePanel>
 
-                <%# RenderDynamicBoxes(Container.DataItem) %>
-            </div>
-        </ItemTemplate>
-    </asp:Repeater>
-
-    <!-- Footer Section -->
+   
     <div class="footer">
-        <!-- Text at the left corner -->
-        <div class="footer-left">Powered by TPM-Trak &copy;</div>
-
-        <!-- Dark blue centered styled box with "Welcome to TPM-Trak" -->
-        <div class="footer-center-container">Welcome To TPM-Trak</div>
-
-        <!-- Right section with an image -->
+       <div class="footer-left">Powered by TPM-Trak &copy;</div>
+       <div class="footer-center-container">Welcome To TPM-Trak</div>
         <div class="footer-right">
             <img src="./Images/AmiTLogo.jpg" alt="Footer Logo" width="100" height="100" />
         </div>
     </div>
+    <asp:Timer ID="timerUpdate" runat="server" Interval="5000" OnTick="timerUpdate_Tick" Enabled="True" />
+       </form>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const currentDate = new Date();
-            const formattedDate = currentDate.toLocaleDateString('en-US', {
+            const formattedDate = currentDate.toLocaleDateString('en-IN', {
                 day: '2-digit',
                 month: '2-digit',
                 year: 'numeric',
             });
-            document.getElementById('currentDate').textContent = formattedDate;
-
-            setInterval(() => {
-                location.reload(true); // Forces a reload without using the cache
-            }, 2000);
+            const [day, month, year] = formattedDate.split('/');
+            const finalDate = `${day}-${month}-${year}`;
+            document.getElementById('currentDate').textContent = finalDate;
         });
 </script>
 
