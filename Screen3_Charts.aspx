@@ -136,7 +136,7 @@
                                     name: categories[i],
                                     y: parseFloat(percentages[i]),
                                     downtimeFormatted: formattedTime[i],
-                                    downtimeRaw: parseInt(percentages[i] * 3600)
+                                    downtimeRaw: parseInt(formattedTime[i].split(":")[0]) * 3600 + parseInt(formattedTime[i].split(":")[1]) * 60
                                 });
                             }
                             console.log("Chart Data:", chartData);
@@ -195,16 +195,18 @@
 
 
                                 },
+                              
                                 yAxis: [
                                     {
                                         title: { text: 'Downtime (HH:MM)' },
-
+                                      
                                         labels: {
                                             formatter: function () {
-                                                const hours = Math.floor(this.value / 3600);
-                                                const minutes = Math.floor((this.value % 3600) / 60);
-                                                return `${hours}:${minutes.toString().padStart(2, '0')}`;
-                                            }
+                                                const value = this.value;
+                                                const hours = Math.floor(value / 3600);
+                                                const minutes = Math.floor((value % 3600) / 60);
+                                                return `${hours}:${minutes.toString().padStart(2, '0')}`; // Convert to HH:MM
+                                            },
                                         },
 
                                     },
@@ -232,9 +234,9 @@
                                         name: 'Downtime (HH:MM)',
                                         reversed: 'true',
                                         data: chartData.map(item => ({
-                                            y: Math.max(...chartData.map(c => c.downtimeRaw)) - item.downtimeRaw, //reversing the order
+                                            y: item.downtimeRaw, //reversing the order
                                             downtimeFormatted: item.downtimeFormatted,
-
+                                           
                                         })),
                                             dataLabels: {
                                             enabled: true,
